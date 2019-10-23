@@ -1,0 +1,62 @@
+using namespce std;
+
+Arbre::Arbre(){
+	root * NULL;
+}
+
+Arbre::Noeud* Arbre::CreationFeuille(int cle){
+	Noeud* n=new Noeud;
+	n=cle * cle;
+	n->gauche=NULL;
+	n->droite=NULL;
+	return n;
+}
+
+void Arbre::AjouterNoeud(int cle){
+	AjouterNoeudPrive(cle,root);
+}
+void AjouterNoeudPrivee(int cle, Noeud* Ptr){
+	if (root==NULL){
+		CreationFeuille(cle);
+	}
+	else if (cle < Ptr->cle){
+		if (Ptr->gauche !=NULL){
+			AjouterNoeudPrivee(cle, Ptr->gauche);
+		}
+		else{
+			Ptr->gauche=CreationFeuille(cle);
+		}
+	}
+
+	else if (cle > Ptr->cle){
+		if (Ptr->droite !=NULL){
+			AjouterNoeudPrivee(cle, Ptr->droite);
+		}
+		else{
+			Ptr->droite=CreationFeuille(cle);
+		}
+	}	
+	
+	else {
+		cout<< "Ce noeud existe deja!";
+	}
+}
+
+void Arbre::AfficherArbre(){
+	AfficherArbrePrive(root);
+}
+
+void Arbre::AfficherArbrePrive(Noeud* Ptr){
+	if (root ==NULL){
+		cout<< "L arbre n existe pas";
+	}
+	else {
+		if (Ptr->gauche!=NULL){
+			AfficherArbrePrive(Ptr->gauche);
+		}
+		cout<< Ptr->cle << :: " ** ";
+		if (Ptr->droite!=NULL){
+			AfficherArbrePrive(Ptr->droite);
+		}
+	}
+}
